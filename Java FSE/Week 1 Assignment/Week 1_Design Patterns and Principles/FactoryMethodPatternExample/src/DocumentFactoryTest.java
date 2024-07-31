@@ -1,5 +1,3 @@
-// DocumentFactoryTest.java
-
 public class DocumentFactoryTest {
     public static void main(String[] args) {
         DocumentFactory wordFactory = new WordDocumentFactory();

@@ -1,32 +1,35 @@
 public class ComputerBuilderTest {
-    public static void main(String[] args) {
-        // Create a basic computer
-        Computer basicComputer = new Computer.Builder()
-                .setCpu("Intel Core i3")
-                .setRam(8)
-                .setStorage("500GB HDD")
-                .build();
-        System.out.println("Basic Computer: " + basicComputer.getCpu() + ", " + basicComputer.getRam() + "GB RAM, "
-                + basicComputer.getStorage());
+        public static void main(String[] args) {
+                Computer lowLevelComputer = new Computer.Builder()
+                                .setCpu("Intel Core i3")
+                                .setRam(8)
+                                .setStorage("500GB HDD")
+                                .build();
+                System.out.println(
+                                "Office level Computer: " + lowLevelComputer.getCpu() + ", " + lowLevelComputer.getRam()
+                                                + "GB RAM, "
+                                                + lowLevelComputer.getStorage());
 
-        // Create a gaming computer
-        Computer gamingComputer = new Computer.Builder()
-                .setCpu("Intel Core i7")
-                .setRam(16)
-                .setStorage("1TB SSD")
-                .setHasGraphicsCard(true)
-                .build();
-        System.out.println("Gaming Computer: " + gamingComputer.getCpu() + ", " + gamingComputer.getRam() + "GB RAM, "
-                + gamingComputer.getStorage() + ", Graphics Card: " + gamingComputer.isHasGraphicsCard());
+                Computer highLevelComputer = new Computer.Builder()
+                                .setCpu("Amd RYZEN 9 5900X")
+                                .setRam(32)
+                                .setStorage("1TB SSD")
+                                .setHasGraphicsCard(true)
+                                .build();
+                System.out.println("Higher Processing Computer: " + highLevelComputer.getCpu() + ", "
+                                + highLevelComputer.getRam()
+                                + "GB RAM, "
+                                + highLevelComputer.getStorage() + ", Graphics Card: "
+                                + highLevelComputer.isHasGraphicsCard());
 
-        // Create a server computer
-        Computer serverComputer = new Computer.Builder()
-                .setCpu("Intel Xeon")
-                .setRam(32)
-                .setStorage("2TB HDD")
-                .setHasSSD(true)
-                .build();
-        System.out.println("Server Computer: " + serverComputer.getCpu() + ", " + serverComputer.getRam() + "GB RAM, "
-                + serverComputer.getStorage() + ", SSD: " + serverComputer.isHasSSD());
-    }
+                Computer serverLevelComputer = new Computer.Builder()
+                                .setCpu("AMD Opteron 6276")
+                                .setRam(32)
+                                .setStorage("8TB HDD")
+                                .setHasSSD(true)
+                                .build();
+                System.out.println("Server Computer: " + serverLevelComputer.getCpu() + ", "
+                                + serverLevelComputer.getRam() + "GB RAM, "
+                                + serverLevelComputer.getStorage() + ", SSD: " + serverLevelComputer.isHasSSD());
+        }
 }
