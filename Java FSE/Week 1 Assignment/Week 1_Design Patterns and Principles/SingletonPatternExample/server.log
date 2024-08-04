@@ -1,5 +1,0 @@
-[TRACE] [2024-07-31T12:47:52.987577200] This is trace level log message
-[DEBUG] [2024-07-31T12:47:52.993947700] This is debug level log message
-[INFO] [2024-07-31T12:47:52.993947700] This is info level log message
-[WARN] [2024-07-31T12:47:52.993947700] This is warn level log message
-[ERROR] [2024-07-31T12:47:52.993947700] This is error level log message
