@@ -1,6 +1,8 @@
 package com.employee.service;
 
 import com.employee.entity.Employee;
+import com.employee.dto.EmployeeDto;
+
 import com.employee.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,16 +21,16 @@ public class EmployeeService {
         return employeeRepository.findAll(pageable);
     }
 
-    public Page<Employee> getEmployeesByDepartment(String departmentName, Pageable pageable) {
-        return employeeRepository.findByDepartmentName(departmentName, pageable);
+    public Page<EmployeeDto> getEmployeeDtosByDepartment(String departmentName, Pageable pageable) {
+        return employeeRepository.findEmployeeDtosByDepartment(departmentName, pageable);
     }
 
-    public Page<Employee> searchEmployeesByName(String name, Pageable pageable) {
-        return employeeRepository.findByNameContaining(name, pageable);
+    public Page<EmployeeDto> searchEmployeeDtosByName(String name, Pageable pageable) {
+        return employeeRepository.searchEmployeeDtosByName(name, pageable);
     }
 
-    public Page<Employee> getEmployeesWithHighSalary(Double salary, Pageable pageable) {
-        return employeeRepository.findBySalaryGreaterThan(salary, pageable);
+    public Page<EmployeeDto> getHighSalaryEmployeeDtos(Double salary, Pageable pageable) {
+        return employeeRepository.findHighSalaryEmployeeDtos(salary, pageable);
     }
 
     public Employee createEmployee(Employee employee) {

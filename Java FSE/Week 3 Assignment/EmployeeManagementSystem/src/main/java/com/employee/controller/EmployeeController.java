@@ -1,5 +1,6 @@
 package com.employee.controller;
 
+import com.employee.dto.EmployeeDto;
 import com.employee.entity.Employee;
 import com.employee.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +10,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-
-import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/employees")
@@ -35,37 +33,37 @@ public class EmployeeController {
         return employeeService.getAllEmployees(pageable);
     }
 
-    @GetMapping("/department/{departmentName}")
-    public Page<Employee> getEmployeesByDepartment(
+    @GetMapping("/projections/department/{departmentName}")
+    public Page<EmployeeDto> getEmployeeDtosByDepartment(
             @PathVariable String departmentName,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "id") String sortBy,
             @RequestParam(defaultValue = "asc") String sortDir) {
         Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.fromString(sortDir), sortBy));
-        return employeeService.getEmployeesByDepartment(departmentName, pageable);
+        return employeeService.getEmployeeDtosByDepartment(departmentName, pageable);
     }
 
-    @GetMapping("/search")
-    public Page<Employee> searchEmployeesByName(
+    @GetMapping("/projections/search")
+    public Page<EmployeeDto> searchEmployeeDtosByName(
             @RequestParam String name,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "id") String sortBy,
             @RequestParam(defaultValue = "asc") String sortDir) {
         Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.fromString(sortDir), sortBy));
-        return employeeService.searchEmployeesByName(name, pageable);
+        return employeeService.searchEmployeeDtosByName(name, pageable);
     }
 
-    @GetMapping("/salary")
-    public Page<Employee> getEmployeesWithHighSalary(
+    @GetMapping("/projections/salary")
+    public Page<EmployeeDto> getHighSalaryEmployeeDtos(
             @RequestParam Double salary,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "id") String sortBy,
             @RequestParam(defaultValue = "asc") String sortDir) {
         Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.fromString(sortDir), sortBy));
-        return employeeService.getEmployeesWithHighSalary(salary, pageable);
+        return employeeService.getHighSalaryEmployeeDtos(salary, pageable);
     }
 
     @GetMapping("/{id}")

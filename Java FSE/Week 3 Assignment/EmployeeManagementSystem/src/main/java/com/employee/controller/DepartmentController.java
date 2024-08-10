@@ -1,8 +1,13 @@
 package com.employee.controller;
 
+import com.employee.dto.DepartmentDto;
 import com.employee.entity.Department;
 import com.employee.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,15 +25,25 @@ public class DepartmentController {
         return departmentService.createDepartment(department);
     }
 
-    @GetMapping
-    public List<Department> getAllDepartments() {
-        return departmentService.getAllDepartments();
+    @GetMapping("/dtos")
+    public Page<DepartmentDto> getAllDepartmentDtos(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "id") String sortBy,
+            @RequestParam(defaultValue = "asc") String sortDir) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.fromString(sortDir), sortBy));
+        return departmentService.getAllDepartmentDtos(pageable);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Department> getDepartmentById(@PathVariable Long id) {
-        Department department = departmentService.getDepartmentById(id).orElseThrow();
-        return ResponseEntity.ok(department);
+    @GetMapping("/dtos/name/{name}")
+    public Page<DepartmentDto> getDepartmentDtosByName(
+            @PathVariable String name,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "id") String sortBy,
+            @RequestParam(defaultValue = "asc") String sortDir) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.fromString(sortDir), sortBy));
+        return departmentService.getDepartmentDtosByName(name, pageable);
     }
 
     @PutMapping("/{id}")

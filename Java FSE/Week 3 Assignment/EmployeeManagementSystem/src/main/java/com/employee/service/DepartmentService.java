@@ -1,12 +1,13 @@
 package com.employee.service;
 
 import com.employee.entity.Department;
+import com.employee.dto.DepartmentDto;
+
 import com.employee.repository.DepartmentRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class DepartmentService {
@@ -18,12 +19,12 @@ public class DepartmentService {
         return departmentRepository.save(department);
     }
 
-    public List<Department> getAllDepartments() {
-        return departmentRepository.findAll();
+    public Page<DepartmentDto> getAllDepartmentDtos(Pageable pageable) {
+        return departmentRepository.findAllDepartmentDtos(pageable);
     }
 
-    public Optional<Department> getDepartmentById(Long id) {
-        return departmentRepository.findById(id);
+    public Page<DepartmentDto> getDepartmentDtosByName(String name, Pageable pageable) {
+        return departmentRepository.findDepartmentDtosByName(name, pageable);
     }
 
     public Department updateDepartment(Long id, Department departmentDetails) {
