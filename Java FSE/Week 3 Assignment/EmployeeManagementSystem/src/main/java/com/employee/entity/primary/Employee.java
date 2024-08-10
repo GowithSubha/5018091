@@ -1,6 +1,4 @@
-package com.employee.entity;
-
-import java.util.List;
+package com.employee.entity.primary;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -10,26 +8,32 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import com.employee.entity.secondary.Department;
+
 import java.time.LocalDateTime;
 import jakarta.persistence.*;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@Table(name = "departments")
+@Table(name = "employees")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Department {
+@NamedQuery(name = "Employee.findByDepartment", query = "SELECT e FROM Employee e WHERE e.department.name = :departmentName")
+public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
+    private double salary;
+    private String email;
 
-    @OneToMany(mappedBy = "department")
-    private List<Employee> employees;
+    @ManyToOne
+    @JoinColumn(name = "department_id", nullable = false)
+    private Department department;
 
     @CreatedDate
     @Column(nullable = false, updatable = false)
@@ -37,4 +41,5 @@ public class Department {
 
     @LastModifiedDate
     private LocalDateTime lastModifiedDate;
+
 }

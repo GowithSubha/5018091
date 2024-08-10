@@ -1,9 +1,9 @@
 package com.employee.service;
 
-import com.employee.entity.Department;
 import com.employee.dto.DepartmentDto;
+import com.employee.entity.secondary.Department;
+import com.employee.repository.secondary.DepartmentRepository;
 
-import com.employee.repository.DepartmentRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.beans.factory.annotation.Autowired;

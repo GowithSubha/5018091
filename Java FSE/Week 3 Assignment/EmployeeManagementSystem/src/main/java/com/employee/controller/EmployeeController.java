@@ -1,7 +1,7 @@
 package com.employee.controller;
 
 import com.employee.dto.EmployeeDto;
-import com.employee.entity.Employee;
+import com.employee.entity.primary.Employee;
 import com.employee.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
