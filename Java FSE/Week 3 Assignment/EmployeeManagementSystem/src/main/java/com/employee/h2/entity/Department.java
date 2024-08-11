@@ -1,16 +1,14 @@
-package com.employee.entity.secondary;
+package com.employee.h2.entity;
 
 import java.util.List;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
+import lombok.*;
+
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-import com.employee.entity.primary.Employee;
 
 import java.time.LocalDateTime;
 import jakarta.persistence.*;
@@ -22,6 +20,7 @@ import jakarta.persistence.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Department {
 
     @Id
@@ -33,9 +32,18 @@ public class Department {
     @OneToMany(mappedBy = "department")
     private List<Employee> employees;
 
+    @CreatedBy
+    @Transient
+    @Column(nullable = false, updatable = false)
+    private String createdBy;
+
     @CreatedDate
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdDate;
+
+    @LastModifiedBy
+    @Transient
+    private String lastModifiedBy;
 
     @LastModifiedDate
     private LocalDateTime lastModifiedDate;

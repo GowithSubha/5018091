@@ -1,8 +1,8 @@
 package com.employee.service;
 
 import com.employee.dto.DepartmentDto;
-import com.employee.entity.secondary.Department;
-import com.employee.repository.secondary.DepartmentRepository;
+import com.employee.h2.entity.Department;
+import com.employee.h2.repository.DepartmentRepository;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

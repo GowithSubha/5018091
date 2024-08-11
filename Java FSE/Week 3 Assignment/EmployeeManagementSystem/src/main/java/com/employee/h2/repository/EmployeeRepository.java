@@ -1,7 +1,7 @@
-package com.employee.repository.primary;
+package com.employee.h2.repository;
 
-import com.employee.entity.primary.Employee;
 import com.employee.dto.EmployeeDto;
+import com.employee.h2.entity.Employee;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

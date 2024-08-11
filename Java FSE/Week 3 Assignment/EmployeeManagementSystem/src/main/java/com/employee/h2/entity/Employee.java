@@ -1,15 +1,14 @@
-package com.employee.entity.primary;
+package com.employee.h2.entity;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
+import lombok.*;
+
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.employee.entity.secondary.Department;
-
+import java.time.Instant;
 import java.time.LocalDateTime;
 import jakarta.persistence.*;
 
@@ -20,6 +19,7 @@ import jakarta.persistence.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @NamedQuery(name = "Employee.findByDepartment", query = "SELECT e FROM Employee e WHERE e.department.name = :departmentName")
 public class Employee {
 
@@ -35,9 +35,18 @@ public class Employee {
     @JoinColumn(name = "department_id", nullable = false)
     private Department department;
 
+    @CreatedBy
+    @Transient
+    @Column(nullable = false, updatable = false)
+    private String createdBy;
+
     @CreatedDate
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdDate;
+
+    @LastModifiedBy
+    @Transient
+    private String lastModifiedBy;
 
     @LastModifiedDate
     private LocalDateTime lastModifiedDate;
