@@ -14,18 +14,18 @@ import org.springframework.stereotype.Repository;
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
         // Custom query to find employees by department with pagination and sorting
-        @Query("SELECT new com.employee.dto.EmployeeDto(e.id, e.fullName, e.salary, e.department.name) " +
+        @Query("SELECT new com.employee.dto.EmployeeDto(e.id, e.name, e.salary, e.department.name) " +
                         "FROM Employee e WHERE e.department.name = :departmentName")
         Page<EmployeeDto> findEmployeeDtosByDepartment(@Param("departmentName") String departmentName,
                         Pageable pageable);
 
         // Custom query to search employees by name with pagination and sorting
-        @Query("SELECT new com.employee.dto.EmployeeDto(e.id, e.fullName, e.salary, e.department.name) " +
-                        "FROM Employee e WHERE e.fullName LIKE %:name%")
+        @Query("SELECT new com.employee.dto.EmployeeDto(e.id, e.name, e.salary, e.department.name) " +
+                        "FROM Employee e WHERE e.name LIKE %:name%")
         Page<EmployeeDto> searchEmployeeDtosByName(@Param("name") String name, Pageable pageable);
 
         // Custom query to find high earning employees with pagination and sorting
-        @Query("SELECT new com.employee.dto.EmployeeDto(e.id, e.fullName, e.salary, e.department.name) " +
+        @Query("SELECT new com.employee.dto.EmployeeDto(e.id, e.name, e.salary, e.department.name) " +
                         "FROM Employee e WHERE e.salary > :salary")
         Page<EmployeeDto> findHighSalaryEmployeeDtos(@Param("salary") Double salary, Pageable pageable);
 

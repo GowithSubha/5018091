@@ -38,7 +38,7 @@ public class Employee {
 
     @Column(name = "full_name", insertable = false, updatable = false)
     @Formula("concat(first_name, ' ', last_name)")
-    private String fullName;
+    private String name;
 
     private double salary;
     private String email;
