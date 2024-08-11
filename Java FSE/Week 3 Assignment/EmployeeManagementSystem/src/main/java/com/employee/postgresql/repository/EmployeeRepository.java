@@ -1,7 +1,7 @@
-package com.employee.h2.repository;
+package com.employee.postgresql.repository;
 
 import com.employee.dto.EmployeeDto;
-import com.employee.h2.entity.Employee;
+import com.employee.postgresql.entity.Employee;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -28,7 +28,6 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
         @Query("SELECT new com.employee.dto.EmployeeDto(e.id, e.fullName, e.salary, e.department.name) " +
                         "FROM Employee e WHERE e.salary > :salary")
         Page<EmployeeDto> findHighSalaryEmployeeDtos(@Param("salary") Double salary, Pageable pageable);
-
 
         @Query("delete from Employee e")
         void clear();

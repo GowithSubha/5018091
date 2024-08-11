@@ -1,7 +1,7 @@
 package com.employee.controller;
 
 import com.employee.dto.DepartmentDto;
-import com.employee.h2.entity.Department;
+import com.employee.postgresql.entity.Department;
 import com.employee.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -10,8 +10,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/departments")

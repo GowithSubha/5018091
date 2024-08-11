@@ -1,4 +1,4 @@
-package com.employee.h2.entity;
+package com.employee.postgresql.entity;
 
 import java.util.List;
 

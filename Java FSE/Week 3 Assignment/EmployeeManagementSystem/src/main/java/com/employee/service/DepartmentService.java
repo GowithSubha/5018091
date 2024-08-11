@@ -1,8 +1,8 @@
 package com.employee.service;
 
 import com.employee.dto.DepartmentDto;
-import com.employee.h2.entity.Department;
-import com.employee.h2.repository.DepartmentRepository;
+import com.employee.postgresql.entity.Department;
+import com.employee.postgresql.repository.DepartmentRepository;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

@@ -1,7 +1,7 @@
-package com.employee.h2.repository;
+package com.employee.postgresql.repository;
 
 import com.employee.dto.DepartmentDto;
-import com.employee.h2.entity.Department;
+import com.employee.postgresql.entity.Department;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

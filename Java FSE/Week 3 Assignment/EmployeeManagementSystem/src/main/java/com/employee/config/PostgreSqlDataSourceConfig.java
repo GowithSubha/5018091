@@ -1,6 +1,5 @@
 package com.employee.config;
 
-//import org.hibernate.cfg.Environment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,34 +18,32 @@ import java.util.*;
 
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages = "com.employee.h2.repository",
-        entityManagerFactoryRef = "primaryEntityManagerFactory",
-        transactionManagerRef= "primaryTransactionManager")
-public class H2DataSourceConfig {
+@EnableJpaRepositories(basePackages = "com.employee.postgresql.repository", entityManagerFactoryRef = "primaryEntityManagerFactory", transactionManagerRef = "primaryTransactionManager")
+public class PostgreSqlDataSourceConfig {
 
     @Autowired
     private Environment environment;
 
-
-    //datasource configuration
+    // datasource configuration
     @Bean
     @Primary
     public DataSource primaryDataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName(Objects.requireNonNull(environment.getProperty("spring.datasource.driver-class-name")));
+        dataSource.setDriverClassName(
+                Objects.requireNonNull(environment.getProperty("spring.datasource.driver-class-name")));
         dataSource.setUrl(environment.getProperty("spring.datasource.url"));
         dataSource.setUsername(environment.getProperty("spring.datasource.username"));
         dataSource.setPassword(environment.getProperty("spring.datasource.password"));
         return dataSource;
     }
 
-    //entityManagerFactoryconfiguration
+    // entityManagerFactoryconfiguration
     @Bean(name = "primaryEntityManagerFactory")
     @Primary
     public LocalContainerEntityManagerFactoryBean primaryEntityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(primaryDataSource());
-        em.setPackagesToScan("com.employee.h2.entity");
+        em.setPackagesToScan("com.employee.postgresql.entity");
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
         Map<String, String> props = new HashMap<>();
@@ -57,8 +54,7 @@ public class H2DataSourceConfig {
         return em;
     }
 
-
-    //transactionManager configuration
+    // transactionManager configuration
     @Bean(name = "primaryTransactionManager")
     @Primary
     public PlatformTransactionManager primaryTransactionManager() {

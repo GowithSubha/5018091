@@ -1,4 +1,4 @@
-package com.employee.h2.entity;
+package com.employee.postgresql.entity;
 
 import lombok.*;
 
@@ -11,7 +11,6 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
-
 
 import jakarta.persistence.*;
 
@@ -31,7 +30,6 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     @Column(name = "first_name", nullable = false)
     private String firstName;
 
@@ -41,9 +39,6 @@ public class Employee {
     @Column(name = "full_name", insertable = false, updatable = false)
     @Formula("concat(first_name, ' ', last_name)")
     private String fullName;
-
-
-
 
     private double salary;
     private String email;

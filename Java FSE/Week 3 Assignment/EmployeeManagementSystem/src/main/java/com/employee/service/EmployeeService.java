@@ -1,8 +1,8 @@
 package com.employee.service;
 
 import com.employee.dto.EmployeeDto;
-import com.employee.h2.entity.Employee;
-import com.employee.h2.repository.EmployeeRepository;
+import com.employee.postgresql.entity.Employee;
+import com.employee.postgresql.repository.EmployeeRepository;
 
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
