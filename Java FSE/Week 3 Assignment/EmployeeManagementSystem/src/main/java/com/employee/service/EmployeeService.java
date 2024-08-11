@@ -4,11 +4,13 @@ import com.employee.dto.EmployeeDto;
 import com.employee.h2.entity.Employee;
 import com.employee.h2.repository.EmployeeRepository;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -43,7 +45,8 @@ public class EmployeeService {
 
     public Employee updateEmployee(Long id, Employee employeeDetails) {
         Employee employee = employeeRepository.findById(id).orElseThrow();
-        employee.setName(employeeDetails.getName());
+        employee.setFirstName(employeeDetails.getFirstName());
+        employee.setLastName(employeeDetails.getLastName());
         employee.setEmail(employeeDetails.getEmail());
         employee.setDepartment(employeeDetails.getDepartment());
         employee.setSalary(employeeDetails.getSalary());
@@ -52,5 +55,21 @@ public class EmployeeService {
 
     public void deleteEmployee(Long id) {
         employeeRepository.deleteById(id);
+    }
+
+    @Transactional
+    public void saveEmployeesInBatch(List<Employee> employees) {
+        int batchSize = 50;
+        for (int i = 0; i < employees.size(); i += batchSize) {
+            int toIndex = Math.min(i + batchSize, employees.size());
+            List<Employee> batchList = employees.subList(i, toIndex);
+            employeeRepository.saveAll(batchList);
+            employeeRepository.flush();
+            employeeRepository.clear();
+            if (i + batchSize >= employees.size()) {
+                break;
+            }
+
+        }
     }
 }

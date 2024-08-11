@@ -2,14 +2,17 @@ package com.employee.h2.entity;
 
 import lombok.*;
 
+import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.Formula;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.time.Instant;
 import java.time.LocalDateTime;
+
+
 import jakarta.persistence.*;
 
 @Entity
@@ -20,6 +23,7 @@ import jakarta.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@BatchSize(size = 50)
 @NamedQuery(name = "Employee.findByDepartment", query = "SELECT e FROM Employee e WHERE e.department.name = :departmentName")
 public class Employee {
 
@@ -27,7 +31,20 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+
+    @Column(name = "first_name", nullable = false)
+    private String firstName;
+
+    @Column(name = "last_name", nullable = false)
+    private String lastName;
+
+    @Column(name = "full_name", insertable = false, updatable = false)
+    @Formula("concat(first_name, ' ', last_name)")
+    private String fullName;
+
+
+
+
     private double salary;
     private String email;
 
